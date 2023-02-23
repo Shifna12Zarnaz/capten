@@ -2,7 +2,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
   name: triggertemplate
-  namespace: build
+  namespace: capten-build
 spec:
   params:
     - name: gitrevision
@@ -44,13 +44,13 @@ spec:
               type: cloudEvent
               params:
                 - name: targetURI
-                  value: http://event-display.build.svc.cluster.local
+                  value: http://event-display.capten-build.svc.cluster.local
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
   name: pipelinebinding
-  namespace: build
+  namespace: capten-build
 spec:
   params:
     - name: gitrevision
@@ -58,7 +58,7 @@ spec:
     - name: gitreponame
       value: $(body.repository.name)
     - name: namespace
-      value: build
+      value: capten-build
     - name: gitrepositoryurl
       value: $(body.repository.url)
 ---
@@ -66,7 +66,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: EventListener
 metadata:
   name: listener
-  namespace: build
+  namespace: capten-build
 spec:
   serviceAccountName: tekton-triggers-sa
   triggers:
