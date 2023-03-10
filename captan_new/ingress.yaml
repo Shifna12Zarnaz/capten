@@ -9,7 +9,7 @@ spec:
   - websecure
   routes:
   - kind: Rule
-    match: Host(`{{ .Host }}`)
+    match: Host(`trigger.tekton.optimizor.app`)
     services:
     - name: el-listener
       port: 8080
